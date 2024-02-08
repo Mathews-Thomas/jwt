@@ -1,0 +1,15 @@
+const express = require('express')
+const connectdb = require('./Config/DbConnection')
+const dotenv = require('dotenv').config()
+const app = express()
+const authRoutes = require('./Routes/Auth')
+const protectedroute =require('./Routes/protectedRoutes')
+const Port =process.env.PORT
+app.use(express.json())
+app.use('/auth', authRoutes)
+app.use('/protected',protectedroute)
+// app.get('/', (req, res) => res.send('Hello World!'))
+app.listen(Port, () => {
+    connectdb()
+    console.log(`Example app listening on port ${Port}!`)
+})
